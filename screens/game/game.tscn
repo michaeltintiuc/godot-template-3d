@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5ss0vyaulcvi"]
+
+[ext_resource type="Script" path="res://screens/game/game.gd" id="1_l023l"]
+[ext_resource type="PackedScene" uid="uid://cdmvuacr6fx8c" path="res://ui/pause/pause.tscn" id="2_4ao00"]
+[ext_resource type="PackedScene" uid="uid://d3oebo3ycuw7o" path="res://ui/options/options.tscn" id="3_jhrtf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k87up"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_vj4yb"]
+sky_material = SubResource("ProceduralSkyMaterial_k87up")
+
+[sub_resource type="Environment" id="Environment_6ngfo"]
+background_mode = 2
+sky = SubResource("Sky_vj4yb")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_l023l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6ngfo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.5
+offset_right = 39.5
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "The Game"
+
+[node name="Pause" parent="UI" instance=ExtResource("2_4ao00")]
+layout_mode = 1
+
+[node name="Options" parent="UI" instance=ExtResource("3_jhrtf")]
+process_mode = 3
+layout_mode = 1
